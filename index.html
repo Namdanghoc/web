@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/qvjz8QFW/Logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Cậu có thích tớ không ???</title>
+  <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+  <!-- Container hiệu ứng ảnh (Đặt ở đầu body để làm lớp nền chuẩn) -->
+  <div id="photo-container"></div>
+
+  <!-- Khung nội dung chính -->
+  <img id="gif" src="https://i.pinimg.com/originals/01/df/7f/01df7f2337097617c8e34c15802b077f.gif" alt="Cute GIF"/>
+  <h1 id="question">Em có yêu anh không ??</h1>
+
+  <!-- Nhóm nút bấm mặc định -->
+  <div class="button-group">
+    <div class="container-yes">
+      <button id="yesBtn" class="btn btn-yes">Có</button>
+    </div>
+    <div class="container-no">
+      <button id="noBtn" class="btn btn-no">Không</button>
+    </div>
+  </div>
+
+  <!-- Nút Đọc Thư (Ban đầu sẽ ẩn đi, kích hoạt bằng JS sau khi bấm 'Có') -->
+  <button id="letterBtn" class="btn" style="display: none; background-color: #ff3399; color: white; margin-top: 1rem; z-index: 100;">
+    Đọc Thư ✉️
+  </button>
+
+  <!-- Hộp thoại chứa Tâm Thư Bí Mật -->
+  <div id="letterModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Gửi cậu... ❤️</h2>
+      <div class="letter-text">
+        <!-- Bạn có thể sửa nội dung bức thư tay ở phần này tùy thích -->
+        <p>Chào cậu, người tớ thích rất nhiều...</p>
+        <p>Cảm ơn cậu vì đã đồng ý và cho tui cơ hội này nha. Thật ra tớ đã chuẩn bị trang web này từ lâu lắm rồi, mỗi bức ảnh xuất hiện trên màn hình đều là những khoảnh khắc tớ thấy cậu đáng yêu nhất.</p>
+        <p>Mong rằng chặng đường sắp tới của tụi mình sẽ luôn ngập tràn niềm vui và hạnh phúc như lúc này. Yêu cậu nhiều lắm! 🥰</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hệ thống âm thanh nền -->
+  <audio id="bg-music1">
+    <source src="./style/sound/No01.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="bg-music2">
+    <source src="./style/sound/Huh02.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="bg-music3">
+    <source src="./style/sound/Quack03.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="bg-music4">
+    <source src="./style/sound/nhac.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Khởi chạy mã điều khiển -->
+  <script src="./style/script.js"></script>
+</body>
+</html>
