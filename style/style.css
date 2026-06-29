@@ -1,0 +1,327 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pacifico', cursive;
+}
+
+body {
+  background-color: #ffeef3;
+  background-image: 
+    linear-gradient(45deg, #ffdde1 25%, transparent 25%, transparent 75%, #ffdde1 75%, #ffdde1), 
+    linear-gradient(45deg, #ffdde1 25%, transparent 25%, transparent 75%, #ffdde1 75%, #ffdde1);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+h1 {
+  color: #ff3399;
+  font-size: 2rem;
+  min-height: 2em;
+}
+
+img {
+  width: 60vw;
+  max-width: 250px;
+  height: auto;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-yes {
+  background-color: #66ff99;
+  color: #006600;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-no {
+  background-color: #ff6666;
+  color: #800000;
+  position: relative;
+  z-index: 1;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.emoji-effect {
+  position: fixed;
+  animation: popFade 1s ease-out forwards;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+}
+
+@keyframes popFade {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.5) translateY(-30px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(0.5) translateY(-60px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@keyframes shakeHard {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shakeHard 0.6s ease;
+}
+
+#gif, h1, .button-group {
+    position: relative;
+    z-index: 99; /* Đẩy hẳn lên trên các ảnh lạc trôi */
+}
+
+#photo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2; /* Nằm dưới nội dung chính và dưới cả emoji hiệu ứng */
+}
+
+/* Nội dung chính và nút bấm luôn nổi lên trên cùng */
+#gif, h1, .button-group {
+    position: relative;
+    z-index: 10; 
+}
+
+/* Emoji hiệu ứng 😭 hoặc ❤️ khi click luôn nằm trên cùng biệt lập */
+.emoji-effect {
+    position: fixed;
+    animation: popFade 1s ease-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 9999; /* Đảm bảo cực kỳ nổi bật */
+}
+
+/* Nội dung chính luôn nằm trên */
+#gif,
+h1,
+.button-group{
+    position:relative;
+    z-index:5;
+}
+/* Thêm viền trắng polaroid cho ảnh cá nhân xuất hiện ngẫu nhiên */
+.floating-photo {
+  position: absolute;
+  width: 100px;
+  height: 130px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: #fff;
+  padding: 5px 5px 15px 5px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.2);
+  animation: fadeInOutPhoto 6s ease-in-out forwards;
+  
+  /* BẮT BUỘC THÊM DÒNG NÀY */
+  pointer-events: auto;   /* Cho phép chuột tương tác riêng với bức ảnh này */
+  transition: transform 0.2s ease, z-index 0s; 
+}
+
+/* Cập nhật lại class hoa trong CSS */
+.flower {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  animation: dropFlower 7s linear forwards;
+  
+  /* Bỏ width/height cố định, dùng dòng dưới để tối ưu theo font-size */
+  width: auto;
+  height: auto;
+  line-height: 1;
+}
+
+/* Hiệu ứng hiển thị ngẫu nhiên (hiện lên, giữ một lúc rồi mờ dần) */
+@keyframes fadeInOutPhoto {
+  0% {
+    transform: scale(0.3) rotate(var(--rot));
+    opacity: 0;
+  }
+  15% {
+    transform: scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+  85% {
+    transform: scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+/* Hiệu ứng hoa rơi từ trên xuống */
+@keyframes dropFlower {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    transform: translateX(50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Sửa lại đoạn Hover */
+.floating-photo:hover {
+  transform: scale(1.6) rotate(0deg) !important; /* Phóng to và đưa thẳng ảnh lại */
+  z-index: 1000 !important;                      /* Nổi bật hẳn lên trên các ảnh khác */
+  animation-play-state: paused;                  /* Đóng băng hiệu ứng mờ dần */
+  cursor: pointer;
+}
+
+/* Nút Đọc Thư khi xuất hiện */
+#letterBtn {
+  position: relative;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.8rem;
+  box-shadow: 0 4px 15px rgba(255, 51, 153, 0.4);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Khung nền mờ phía sau thư */
+.modal {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Nền tối nhẹ mờ mờ */
+  z-index: 99999; /* Luôn trên cùng tất cả mọi thứ */
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+/* Tấm thư tay chính giữa */
+.modal-content {
+  background: #fffdf9; /* Màu giấy thô vintage */
+  background-image: linear-gradient(#f4edd2 1px, transparent 1px); /* Đường kẻ ngang giấy tập */
+  background-size: 100% 2em;
+  padding: 2.5rem 2rem;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+  text-align: left;
+  transform: translateY(-50px);
+  transition: transform 0.3s ease;
+  border: 2px dashed #ff99bb;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+}
+
+/* Tiêu đề bức thư */
+.modal-content h2 {
+  color: #ff3399;
+  font-family: 'Pacifico', cursive;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Nội dung chữ trong thư */
+.letter-text {
+  font-size: 1.05rem;
+  line-height: 2em;
+  color: #444;
+  font-family: sans-serif; 
+  max-height: none;
+  overflow-y: visible; 
+}
+
+.letter-text p {
+  margin-bottom: 1rem;
+  text-indent: 20px;
+}
+
+/* Nút Đóng thư (Dấu x) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  color: #aaa;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #ff3399;
+}
